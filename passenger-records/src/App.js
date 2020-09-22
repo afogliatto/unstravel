@@ -1,10 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
+import PsgrList from './components/PsgrList'
 
 class App extends Component {
   state = {
     showModal: false,
+    arrPsgr: []
   };
 
   closeHandler = () => {
@@ -18,26 +20,30 @@ class App extends Component {
       showModal: true,
     });
   };
-  const [arrPsgr, setArrPsgr] = useState([]);
+  
+  addPsgr = (psgr) => {
+    this.setState(
+      {
+        arrPsgr:
+          [...this.state.arrPsgr,
+            {
+              firstname: psgr.firstname,
+              lastname: psgr.lastname,
+              email: psgr.email,
+              passport: psgr.passport,
+              frqtflyer: psgr.frqtflyer
+            }
+          ] 
+      }
+    )
+  };
 
   render() {
-
-    const addPsgr = (psgr) => {
-      setArrPsgr([
-        ...arrPsgr,
-        {
-          firstname: psgr.firstname,
-          lastname: psgr.lastname,
-          email: psgr.email,
-          passport: psgr.passport,
-          frqtflyer: psgr.frqtflyer,
-        },
-      ]);
-    };
     return (
-      <div className="App" addPsgr={addPsgr} arrPsgr={arrPsgr}>
+      <div className="App">
+        <PsgrList arrPsgr={this.state.arrPsgr}></PsgrList>
         {this.state.showModal ? (
-          <Modal title="Your Bookings are: " close={this.closeHandler}></Modal>
+          <Modal title="Your Bookings are: " close={this.closeHandler} addPsgr={this.addPsgr}></Modal>
         ) : null}
         <button onClick={this.openHandler}>Show</button>
       </div>

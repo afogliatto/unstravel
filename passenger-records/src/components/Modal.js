@@ -13,7 +13,7 @@ const Modal = (props) => {
           </button>
         </div>
         <div>
-          <MdlForm />
+          <MdlForm addPsgr={props.addPsgr}/>
         </div>
         <div className="mdl-bottom">
           <button className="mdl-close-btn" onClick={props.close}>

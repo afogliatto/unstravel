@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const MdlForm = (addItem) => {
+const MdlForm = ({ addPsgr }) => {
   const [psgr, setPsgr] = useState({
     firstname: "",
     lastname: "",
@@ -16,9 +16,22 @@ const MdlForm = (addItem) => {
     });
   };
 
+  const clearModal= () => {
+    setPsgr(
+      {
+        firstname: "",
+        lastname: "",
+        email: "",
+        passport: "",
+        frqtflyer: "",
+      }
+    )
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    addItem(psgr);
+    addPsgr(psgr);
+    clearModal();
   };
 
   return (
